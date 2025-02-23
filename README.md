@@ -18,7 +18,7 @@ This project demonstrates how to set up an API Gateway locally using AWS SAM and
 
     Open your terminal in VS Code and run:
     
-        '''sam init'''
+        sam init
 
     Choose the following options:
 
@@ -31,7 +31,7 @@ This project demonstrates how to set up an API Gateway locally using AWS SAM and
    
     2. Start an API Gateway Locally
 
-        '''sam local start-api'''
+        sam local start-api
 
     3. Access the API
 
