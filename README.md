@@ -1,4 +1,4 @@
-API Gateway Integration with AWS Lambda
+#API Gateway Integration with AWS Lambda
 
 This project demonstrates how to set up an API Gateway locally using AWS SAM and integrate it with a simple AWS Lambda function. The API Gateway will trigger a Lambda function that returns a "Hello, World!" response.
 
