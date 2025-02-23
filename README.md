@@ -1,81 +1,77 @@
-#API Gateway Integration with AWS Lambda
+**API Gateway Integration with AWS Lambda**
 
 This project demonstrates how to set up an API Gateway locally using AWS SAM and integrate it with a simple AWS Lambda function. The API Gateway will trigger a Lambda function that returns a "Hello, World!" response.
 
-Prerequisites
+**Prerequisites**
 
-AWS CLI installed and configured
+    - AWS CLI installed and configured
 
-AWS SAM CLI installed (Serverless Application Model)
+    - AWS SAM CLI installed (Serverless Application Model)
 
-Docker installed for running the Lambda function and API Gateway locally
+    - Docker installed for running the Lambda function and API Gateway locally
 
-Visual Studio Code (optional but recommended)
+    - Visual Studio Code (optional but recommended)
 
-Setting Up API Gateway Locally Using AWS SAM
+**Setting Up API Gateway Locally Using AWS SAM**
 
-1. Initialize a New AWS SAM Application
+    1. Initialize a New AWS SAM Application
 
-Open your terminal in VS Code and run:
+    Open your terminal in VS Code and run:
+    
+        '''sam init'''
 
-sam init
+    Choose the following options:
 
-Choose the following options:
+        Template: AWS Quick Start Templates
+        
+        Runtime: Python 3.9
+        
+        Project Type: Hello World Example
 
-Template: AWS Quick Start Templates
+   
+    2. Start an API Gateway Locally
 
-Runtime: Python 3.8 (or your preferred language)
+        '''sam local start-api'''
 
-Project Type: Hello World Example
+    3. Access the API
 
-2. Build the Application
+        curl http://127.0.0.1:3000/hello
+        
+        Or open your browser and go to: http://127.0.0.1:3000/hello
 
-cd <your-sam-app-directory>
-sam build
+**Creating a Basic Lambda "Hello World" with API Gateway**
 
-3. Start an API Gateway Locally
+ **  _ hello_world/app.py_**
 
-sam local start-api
+        def lambda_handler(event, context):
+            return {
+                "statusCode": 200,
+                "body": "Hello, World!"
+            }
 
-4. Access the API
+ ** _  template.yaml_**
 
-curl http://127.0.0.1:3000/hello
-
-Or open your browser and go to: http://127.0.0.1:3000/hello
-
-Creating a Basic Lambda "Hello World" with API Gateway
-
-hello_world/app.py
-
-def lambda_handler(event, context):
-    return {
-        "statusCode": 200,
-        "body": "Hello, World!"
+    AWSTemplateFormatVersion: '2010-09-09'
+    Transform: AWS::Serverless-2016-10-31
+    
+    Resources:
+      HelloWorldFunction:
+        Type: AWS::Serverless::Function
+        Properties:
+          Handler: hello_world.app.lambda_handler
+          Runtime: python3.8
+          Events:
+            Api:
+              Type: Api
+              Properties:
+                Path: /hello
+                Method: get
+    
+    Expected Output
+    
+    {
+      "statusCode": 200,
+      "body": "Hello, World!"
     }
-
-template.yaml
-
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-
-Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: hello_world.app.lambda_handler
-      Runtime: python3.8
-      Events:
-        Api:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-
-Expected Output
-
-{
-  "statusCode": 200,
-  "body": "Hello, World!"
-}
 
 
