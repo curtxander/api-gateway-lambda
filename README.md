@@ -67,7 +67,7 @@ This project demonstrates how to set up an API Gateway locally using AWS SAM and
                 Path: /hello
                 Method: get
     
-    Expected Output
+Expected Output
     
     {
       "statusCode": 200,
