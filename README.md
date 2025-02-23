@@ -75,3 +75,5 @@ This project demonstrates how to set up an API Gateway locally using AWS SAM and
     }
 
 
+**Documentation/AWS Serverless Application Model/Developer Guide: Locally run API Gateway with AWS SAM**
+    https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-start-api.html
